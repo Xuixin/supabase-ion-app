@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button icon="list-outline"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title slot="center">Account</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button >
+       <ion-icon slot="icon-only" disabled name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+<ion-content class="account-page">
+
+
+  <form>
+    <ion-item>
+      <ion-input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="text"
+        name="username"
+        [(ngModel)]="profile.username"
+        label="username"
+        label-placement="floating"
+        fill="outline"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="url"
+        name="website"
+        [(ngModel)]="profile.website"
+        label="web"
+        label-placement="floating"
+        fill="outline"
+      ></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="updateProfile()"
+      >Update Profile</ion-button
+    >
+  </form>
+
+  <ion-button expand="block" fill="outline" color="danger" (click)="signOut()"
+    >Log Out</ion-button
+  >
+</ion-content>
