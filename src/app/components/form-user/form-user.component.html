@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()" fill="clear">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>แก้ไขข้อมูล</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Form Card -->
+  <ion-card class="form-card">
+    <ion-card-header>
+      <ion-card-title class="form-title">
+        <ion-icon name="create-outline" class="title-icon"></ion-icon>
+        ข้อมูลส่วนตัว
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="none" class="form-list">
+        <ion-item class="form-item">
+          <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
+          <ion-label position="stacked" class="form-label">ชื่อผู้ใช้</ion-label>
+          <ion-input
+            [(ngModel)]="username"
+            class="form-input"
+            placeholder="กรอกชื่อผู้ใช้">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-icon name="globe-outline" slot="start" color="primary"></ion-icon>
+          <ion-label position="stacked" class="form-label">เว็บไซต์</ion-label>
+          <ion-input
+            [(ngModel)]="website"
+            class="form-input"
+            placeholder="https://example.com">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Action Buttons -->
+  <div class="button-container">
+    <ion-button
+      expand="block"
+      (click)="updateUser()"
+      class="save-button"
+      color="primary">
+      <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+      บันทึกข้อมูล
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      (click)="closeModal()"
+      class="cancel-button"
+      color="medium">
+      <ion-icon name="close-outline" slot="start"></ion-icon>
+      ยกเลิก
+    </ion-button>
+  </div>
+</ion-content>

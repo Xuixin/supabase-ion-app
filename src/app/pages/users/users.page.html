@@ -1,41 +1,114 @@
+
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button icon="list-outline"></ion-menu-button>
+      <ion-menu-button icon="menu-outline"></ion-menu-button>
     </ion-buttons>
 
-    <ion-title slot="center">User</ion-title>
+    <ion-title slot="center">
+      <div class="header-title">
+        <ion-icon name="people-outline" class="header-icon"></ion-icon>
+        User Management
+      </div>
+    </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button >
-       <ion-icon slot="icon-only" disabled name="notifications-outline"></ion-icon>
+
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        <ion-badge color="danger" class="notification-badge">3</ion-badge>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="modern-content">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">users</ion-title>
+      <ion-title size="large" class="page-title">Users</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-card *ngFor="let user of users">
-      <img
-        [src]="user.avatar_url || 'https://ionicframework.com/docs/img/demos/card-media.png'"
-        alt="User Avatar"
-      />
+  <!-- Search and Filter Section -->
+  <div class="search-section">
+    <ion-searchbar
+      placeholder="Search users..."
+      debounce="300"
+      (ionInput)="filterUsers($event)"
+      class="custom-searchbar">
+    </ion-searchbar>
 
-      <ion-card-header>
-        <ion-card-title>{{ user.full_name || user.username }}</ion-card-title>
-        <ion-card-subtitle>ID: {{ user.id }}</ion-card-subtitle>
-      </ion-card-header>
+  </div>
 
-      <ion-card-content>
-        เว็บไซต์: {{ user.website || 'ไม่ระบุ' }}
+  <div class="user-list-container">
+    <ion-card
+      *ngFor="let user of filteredUsers"
+      (click)="openUserDetailModal(user)"
+      class="user-card"
+      button="true">
+
+      <ion-card-content class="card-content">
+        <div class="user-card-content">
+          <div class="user-avatar-section">
+            <ion-avatar class="user-avatar">
+              <img
+                [src]="user.avatar_url || 'https://ionicframework.com/docs/img/demos/avatar.svg'"
+                alt="User Avatar"
+                (error)="onImageError($event)"
+              />
+            </ion-avatar>
+
+          </div>
+
+          <div class="user-info-section">
+            <div class="user-main-info">
+              <h2 class="user-name">{{ user.full_name || user.username }}</h2>
+              <p class="user-email">{{ user.email || 'no-email@example.com' }}</p>
+              <p class="user-id">ID: {{ user.id }}</p>
+            </div>
+
+            <div class="user-meta-info">
+              <div class="meta-item" *ngIf="user.website">
+                <ion-icon name="globe-outline" color="medium"></ion-icon>
+                <span>{{ user.website }}</span>
+              </div>
+              <div class="meta-item" *ngIf="user.phone">
+                <ion-icon name="call-outline" color="medium"></ion-icon>
+                <span>{{ user.phone }}</span>
+              </div>
+              <div class="meta-item" *ngIf="user.created_at">
+                <ion-icon name="calendar-outline" color="medium"></ion-icon>
+                <span>Joined {{ user.created_at | date:'MMM yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-actions-section ">
+
+
+
+            <ion-button
+              fill="clear"
+              size="small"
+              (click)="viewUserDetails(user, $event)">
+              <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
-  </ion-list>
+  </div>
+
+  <div *ngIf="filteredUsers.length === 0" class="empty-state">
+    <ion-icon name="people-outline" class="empty-icon"></ion-icon>
+    <h3>No users found</h3>
+    <p>Try adjusting your search or filter criteria</p>
+    <ion-button fill="outline" >
+      <ion-icon name="add" slot="start"></ion-icon>
+      Add First User
+    </ion-button>
+  </div>
+
+
+
 </ion-content>

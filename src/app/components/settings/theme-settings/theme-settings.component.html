@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>ธีม/โหมด</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="theme-settings">
+
+    <!-- Theme Mode Selection -->
+    <div class="setting-section">
+      <h3>โหมดธีม</h3>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="themeSettings.mode" (ionChange)="onThemeModeChange($event)">
+          <ion-item>
+            <ion-icon [icon]="sunnyOutline" slot="start"></ion-icon>
+            <ion-label>โหมดสว่าง</ion-label>
+            <ion-radio slot="end" value="light"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon [icon]="moonOutline" slot="start"></ion-icon>
+            <ion-label>โหมดมืด</ion-label>
+            <ion-radio slot="end" value="dark"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon [icon]="phonePortraitOutline" slot="start"></ion-icon>
+            <ion-label>ตามระบบ</ion-label>
+            <ion-radio slot="end" value="auto"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+
+    <!-- Primary Color Selection -->
+    <div class="setting-section">
+      <h3>สีหลัก</h3>
+      <div class="color-grid">
+        <div
+          *ngFor="let color of colorOptions"
+          class="color-option"
+          [class.selected]="themeSettings.primaryColor === color.value"
+          (click)="onColorChange(color.value)">
+          <div class="color-circle" [style.background-color]="color.value"></div>
+          <span>{{ color.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Font Size Selection -->
+    <div class="setting-section">
+      <h3>ขนาดตัวอักษร</h3>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="themeSettings.fontSize" (ionChange)="onFontSizeChange($event)">
+          <ion-item>
+            <ion-label>เล็ก</ion-label>
+            <ion-radio slot="end" value="small"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>ปานกลาง</ion-label>
+            <ion-radio slot="end" value="medium"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>ใหญ่</ion-label>
+            <ion-radio slot="end" value="large"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+
+
+    <div class="button-container">
+      <ion-button expand="block" fill="outline" (click)="resetToDefault()">
+        รีเซ็ตเป็นค่าเริ่มต้น
+      </ion-button>
+    </div>
+
+
+    <ion-button expand="block" (click)="goToAdvancedSettings()">
+  ไปที่การตั้งค่าขั้นสูง
+</ion-button>
+  </div>
+</ion-content>

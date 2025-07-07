@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { SettingPageRoutingModule } from './setting-routing.module';
 
 import { SettingPage } from './setting.page';
+import { ThemeSettingsComponent } from 'src/app/components/settings/theme-settings/theme-settings.component';
+import { AdvancedThemeSettingsComponent } from 'src/app/components/settings/advanced-theme-settings/advanced-theme-settings.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { SettingPage } from './setting.page';
     IonicModule,
     SettingPageRoutingModule
   ],
-  declarations: [SettingPage]
+  declarations: [SettingPage, ThemeSettingsComponent, AdvancedThemeSettingsComponent]
 })
 export class SettingPageModule {}
